@@ -1,0 +1,32 @@
+import flet as ft
+
+
+def main(page: ft.Page):
+    counter = ft.Text("0", size=50, data=0)
+
+    hello_world = ft.Text("Hello World", size=50)
+
+    def increment_click(e: ft.Event[ft.FloatingActionButton]):
+        counter.data += 1
+        counter.value = str(counter.data)
+
+    def decrement_click(e: ft.Event[ft.FloatingActionButton]):
+            counter.data -= 1
+            counter.value = str(counter.data)
+
+    page.floating_action_button = ft.FloatingActionButton(icon=ft.Icons.ADD, key="increment", on_click=increment_click)
+    page.add(
+        ft.SafeArea(
+            expand=True,
+            content=ft.Container(
+                expand=True,
+                content=ft.Column(controls=[hello_world, counter],alignment=ft.MainAxisAlignment.CENTER,horizontal_alignment=ft.CrossAxisAlignment.CENTER),
+                alignment=ft.Alignment.CENTER,
+            ),
+        ),
+       ft.FloatingActionButton(icon=ft.Icons.REMOVE, key="decrement", on_click=decrement_click),
+        )
+    
+
+if __name__ == "__main__":    
+    ft.run(main)
